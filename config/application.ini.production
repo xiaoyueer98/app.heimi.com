@@ -1,0 +1,88 @@
+[product]
+;基本配置
+application.ext                             =   'php'
+application.directory                       =   APP_PATH "/application"
+application.library                         =   APP_PATH "/library"
+application.bootstrap                       =   APP_PATH "/application/Bootstrap.php"
+application.cache_config                    =   1
+application.baseUri                         =   "/"
+application.view.ext                        =   'phtml'
+application.modules                         =   'Index,Flow,Demo,Device,User,Upgrade,Api,Crontab'
+application.dispatcher.defaultModule        =   'Index'
+application.dispatcher.defaultController    =   'index'
+application.dispatcher.defaultAction        =   'index'
+;错误设置
+application.dispatcher.throwException       =   1
+application.dispatcher.catchException       =   1   
+;系统配置
+application.system.display_errors           =   1
+application.system.error_reporting          =   1   
+;日志设置
+log.success                                 =   1
+log.error                                   =   1
+log.facility                                =   LOG_LOCAL0                                  
+;数据库服务器配置
+database.user.driver                        =   'MYSQL'             
+database.user.master.host                   =   '10.0.3.16'
+database.user.master.port                   =   '3306'
+database.user.master.username               =   'db_user'  
+database.user.master.password               =   'db_user'
+database.user.master.default                =   'user_db'
+database.user.master.charset                =   'UTF8'
+
+
+database.virtual.driver                         =   'MYSQL'             
+database.virtual.master.host                    =   '10.0.3.19'
+database.virtual.master.port                    =   '3306'
+database.virtual.master.username                =   'db_user'   
+database.virtual.master.password                =   'db_user'           
+database.virtual.master.default                 =   'virtual_db'
+database.virtual.master.charset                 =   'UTF8'
+
+database.device.driver                             =   'MYSQL'             
+database.device.master.host                   =   '10.0.3.19'
+database.device.master.port                   =   '3306'
+database.device.master.username          =   'db_user'  
+database.device.master.password           =   'db_user'
+database.device.master.default               =   'device_db'
+database.device.master.charset               =   'UTF8'
+
+;redis服务器配置
+redis.user.host                             =   '10.0.2.14'
+redis.user.port                             =   6381
+redis.session.host                          =   '10.0.3.14'
+redis.session.port                          =   '6399'
+;抓取联通ccid列表
+redis.ccidlist.host                          =   '10.0.2.14'
+redis.ccidlist.port                          =   '6385'
+
+redis.black.host                             =   '10.0.2.14'
+redis.black.port                             =   6381
+;sms_cluster服务器配置
+sms_cluster = "10.2.1.10:8007,10.2.2.10:8007"
+;memcache服务器配置
+memcache.user.host                          = "10.0.2.15"
+memcache.user.port                          = 11211
+
+;买盒子送话费
+voip.sendfee.url                            =   'http://voip.wifigo.cn/package/freeduration/index'
+;支付接口
+user.pay.url                            =   'http://alipay_callback.wifigo.cn/core_charge_service/payService'
+
+;老卡ID
+oldcardid                                =  2 
+;新卡卡ID
+newcardid                                =  4  
+;3G跨月不清零卡ID
+cardid3g                                =  7 
+;3G跨月不清零卡ID深圳联通
+sz3g                                =  17 
+;新卡卡充值套餐ID
+newcardpayid                                =  12,11  
+;流量查询接口           
+user.suplus.url                             = 'http://182.92.4.184:8080/traffic_find_web/getTraffic/';
+;同步流量查询电话接口域名
+crontab.flow.host                                =   'http://182.92.4.184:8080'
+;卡中心
+cardcenter.host                             =   '182.92.4.183'   
+cardcenter.port                             =   '7919'

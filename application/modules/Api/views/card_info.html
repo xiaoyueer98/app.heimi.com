@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta name="viewport" content="width=device-width,initial-scale=1" /> 
+        <meta name="format-detection" content="telephone=no" />
+        <title>卡详情</title>
+        <link rel="stylesheet" type="text/css"  href="/static/css/reset.css" />
+        <link rel="stylesheet" type="text/css"  href="/static/css/xiangqing.css" />
+        <style>
+
+
+        </style>
+    </head>
+
+    <body>
+        <div id="xq_wrap">
+            <div class="header">
+                <div class="hea_div1">
+                    <p class="hea_div1_p1"><!--12345678912345678912*--><p>
+                    <p class="hea_div1_p2"><!--3GB全国流量卡--></p>
+
+                </div>
+
+                <div  class="hea_div2">
+                    <!--本卡内含3GB流量，1GB=1024MB，有效期3个月，每个自然月可使用1GB流量，当月未使用流量不计入次月。全国流量，跨省免收漫游费。-->
+                </div>
+
+                <div class="hea_div3">
+                    <p>剩余流量</p>
+
+                    <ul><!--
+                            <li><span>2014.10</span><b>988MB</b></li>
+                            <li><span>2014.11</span><b>1024MB</b></li>
+                            <li style="border-right:none"><span>2014.12</span><b>1024MB</b></li>
+                        -->        
+                    </ul>
+
+                    <div style="margin-top:15px;"></div>
+                </div>
+            </div>
+
+
+            <div class="center">
+                <div class="lilu">
+                    <p class="tit" >充值记录</p>
+                    <!--
+                    <div class="sh_hi">
+                            <p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+                            <p class="sh_hi_p2">2014.11到2015.01每月1G</p>
+                    </div>
+
+                    <div class="sh_hi" style="border-bottom:none">
+                            <p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+                            <p class="sh_hi_p2">2014.11到2015.01每月1G</p>
+                    </div>
+                    -->
+                </div>
+                <div style="background:#f0f0f6; height:12px;"></div>
+                <div class="taocana" style="display:none">
+                    <p class="tit1" style="border-bottom: 1px solid #e5e5e5">套餐详情</p>
+
+                    <div class="sh_hi_tancan" style="display:block;">
+                        <ul>
+                            <li>1. 全国均可使用，免漫游费（暂不支持港澳台）</li>
+                            <li>2. 套餐有效期自激活当月开始计算，每月可使用1GB流量，连续3个月</li>
+                            <li>3. 当月未用完的流量不计入次月，跨月流量清零</li>
+                            <li>4. 套餐有效期结束后，3个月内未续费，则该卡作废</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="footer"><a href="javascript:location.href='/Api/pay/index?ccid='+ccid+'&session_id='+session_id" class="czbtn" style="color: #ffffff">充值</a></div>
+        </div>
+        <div id="no_info">
+            <img src="images/xq_pic3.png" />
+
+            <p>
+                未查询到相关信息<br />请确认是否是747流量卡
+            </p>
+        </div>
+        <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/static/js/request.js"></script>
+        <script type="text/javascript">
+
+            var ccid = request("ccid"); //alert(ccid);
+            if (ccid.length > 10) {
+                ccid = ccid.substr(0, 19);
+            }
+            var session_id = request("session_id");//alert(session_id);
+
+
+            $.ajax({
+                url: "/device/Getfloworderlist/index",
+                data: "ccid=" + ccid,
+                type: "GET",
+                dataType: "json",
+                success: function(re) {
+                    var code = re['code'];
+                    if (code == '200') {
+                        //alert(re['data'].ccid);
+
+                        var data = re['data'];
+                        if (data.length == 0) {
+                            $(".lilu").append("<div class=\"sh_hi\" style=\"border-bottom:none;\"><p class=\"sh_hi_p1\" style=\"color:#999;\">无充值记录</p></div>");
+
+                        }
+                        for (var i = 0; i < data.length; i++) {
+
+                            if (i == data.length - 1)
+                                $(".lilu").append("<div class=\"sh_hi\" style=\"border-bottom:none\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+                            else {
+                                $(".lilu").append("<div class=\"sh_hi\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+                            }
+
+                        }
+
+                    }else if(re['code'] == "500"){
+                        location.href="/api/cardinfo/netbusy";
+                    }
+                    $(this).css({
+                        "border-bottom": "1px solid #e5e5e5",
+                        "background": "url(/static/images/xq_pic2.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+
+
+
+                }
+            })
+
+
+            $(".tit").on("click", function() {
+
+                if ($(".sh_hi").css("display") == "block") {
+                    $(".sh_hi").hide();
+                    //$(".sh_hi").remove();
+                    $(this).css({
+                        "border-bottom": "none",
+                        "background": "url(/static/images/xq_pic1.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+                } else {
+                    $(this).css({
+                        "border-bottom": "1px solid #e5e5e5",
+                        "background": "url(/static/images/xq_pic2.png) 98% 50%  no-repeat",
+                        "background-size": "18px 10px"
+                    })
+                    $(".sh_hi").show();
+
+                }
+
+//                if ($(".sh_hi_tancan").css("display") == "block") {
+//                    $(".sh_hi_tancan").hide();
+//                    $(".tit1").css("background", "url(/static/images/xq_pic1.png) no-repeat 98% center");
+//                    $(".tit1").css("background-size", "18px 10px");
+//                }
+
+
+            })
+
+            $(".tit1").on("click", function() {
+
+//                if ($(".sh_hi").css("display") == "block") {
+//                    $(".sh_hi").hide();
+//                    $(".tit").css("background", "url(/static/images/xq_pic1.png) no-repeat 98% center");
+//                    $(".tit").css("background-size", "18px 10px");
+//                }
+
+                if ($(".sh_hi_tancan").css("display") == "block") {
+                    $(".sh_hi_tancan").hide();
+                    $(this).css({
+                        "border-bottom": "none",
+                        "background": "url(/static/images/xq_pic1.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+                } else {
+                    $(".sh_hi_tancan").show();
+                    $(this).css({
+                        "border-bottom": "1px solid #e5e5e5",
+                        "background": "url(/static/images/xq_pic2.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+
+                }
+
+
+            })
+            $(function() {
+                //套餐详情
+                $.ajax({
+                    url: "/api/cardinfo/getFlowInfo",
+                    data: "ccid=" + ccid,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(re) {
+                        if (re['data']['demo'] != undefined) {
+                            var demo = "<li>" + re['data']['demo'] + "</li>";
+                            demo = demo.replace('<br>', '</li><li>');
+                            $(".taocana ul").html(demo);
+                            $(".taocana").show();
+
+                        }
+                    }
+                })
+
+
+            })
+        </script>
+        <script type="text/javascript" src="/static/js/getcardinfo.js"></script>
+
+    </body>
+</html>

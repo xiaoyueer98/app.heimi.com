@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="format-detection" content="telephone=no" />
+    <title>卡详情</title>
+    <link rel="stylesheet" type="text/css"  href="/static/css/card_info_old.css" />
+</head>
+<body>
+    <div id="xq_wrap">
+        <div class="header">
+            <p class="card_num"><!--12345678912345678912*--></p>
+            <span class="span1 card_name">3GB全国流量卡</span>
+            <div class="hea_div2">
+                本卡内含3GB流量（1GB=1024MB）跨月清零，全国均可使用，免漫游费（暂不支持港澳台），套餐有效期自激活当月开始累积，每月可使用1GB流量，连续3个月。
+            </div>
+            <div class="hea_div3">
+                <p>剩余流量<span style="display:none;" id="last_update">（最后更新：2014-11-25 17:52:02）</span></p>
+                <ul>
+                    
+                   <!-- <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>
+                    
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.12</span><b>1024MB</b></li>
+                    <li><span>2014.11</span><b style="color: #2882e2;">98MB</b></li>-->
+                    
+                </ul>
+                <div style="margin-top:15px;"></div>
+            </div>
+        </div>
+        <div class="content">
+            <ul class="tit">
+                <li style="background:url(/static/images/pic3.png) no-repeat center 6px;;background-size:19px 19px;color: #2882e2; border-right: 1px solid #e5e5e5;" id="info_mes" onclick="tab(this.id)">套餐详情</li>
+                <li style="background:url(/static/images/pic4.png) no-repeat center 6px;background-size:19px 19px;" id="pay" onclick="tab(this.id)">充值记录</li>
+            </ul>
+            <div style="clear:both"></div>
+            <ul class="info" id="info_list">
+                <li>1、全国均可使用，免漫游费（暂不支持港澳台）</li>
+                <li>2、用户首次使用该卡联网即激活，有效期自激活当日起算连续180天，如流量用完，则有效期提前结束</li>
+                <li>3、有效期结束后，未用完的流量同时作废，不能再使用</li>
+            </ul>
+            <div class="pay" id="pay_list">
+                <!-- 充值记录 -->
+                <!--<p class="sh_hi_p3">充值时间：2014-11-1&nbsp&nbsp17:01:21</p>-->
+            </div>
+        </div>
+        <div  id="card_In">
+            换卡提示
+        </div>
+    </div>
+    <div id="bg_opcity"></div>
+    <div id="new_show">
+        <a href="javascript:void(0)" id="oDiv"></a>
+        <p id="text_2">亲爱的用户，我们的新套餐上线啦！<br />您正在使用的流量卡及套餐不受影响，可继续使用。<br />现在购买新套餐（需更换新卡），还能享受立减40元的优惠。</p>
+
+        <div class="show_cont">
+            <b>3.5G全国流量卡</b>
+            <span>此卡内含3.5GB流量（1GB=1024MB），跨月流量不清零；首次使用该卡联网即激活。</span>
+            <a id="look_newcard" href="/Api/Cardinfo/displaynew" >查看新卡</a>
+        </div>
+
+        <span id="know">知道了，不再提醒！</span>
+    </div>
+    
+    <script type="text/javascript">
+        //TAB切换
+        function tab(obj) {
+            var info_mes = document.getElementById("info_mes");
+            var pay = document.getElementById("pay");
+            var info_list = document.getElementById("info_list");
+            var pay_list = document.getElementById("pay_list");
+
+
+            if (obj == "info_mes") {
+
+                info_list.style.display = "block";
+                pay_list.style.display = "none";
+
+                info_mes.style.background = "url(/static/images/pic3.png) no-repeat center 6px";
+                pay.style.background = "url(/static/images/pic4.png) no-repeat center 6px";
+                javascript:void(0)
+                info_mes.style.color = "#2882e2";
+                pay.style.color = "#999999";
+
+                info_mes.style.backgroundSize = "19px 19px";
+                pay.style.backgroundSize = "19px 19px";
+            } else if (obj == "pay") {
+
+                info_list.style.display = "none";
+                pay_list.style.display = "block";
+
+                info_mes.style.background = "url(/static/images/pic2.png) no-repeat center 6px";
+                pay.style.background = "url(/static/images/pic01.png) no-repeat center 6px";
+
+                info_mes.style.color = "#999999";
+                pay.style.color = "#2882e2";
+
+                info_mes.style.backgroundSize = "19px 19px";
+                pay.style.backgroundSize = "19px 19px";
+            }
+        }
+
+    </script>
+    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+   <!-- <script type="text/javascript" src="/static/js/touch.js"></script>-->
+    <script type="text/javascript">
+        var new_show = document.getElementById("new_show");
+        var card_In = document.getElementById("card_In");
+        var know = document.getElementById("know");
+        var oDiv = document.getElementById("oDiv");
+        var timer = null;
+        var bg_opcity = document.getElementById("bg_opcity");
+        
+
+        timer = setTimeout("new_show.setAttribute('class' ,'bottomIn')" , 1000);
+
+        oDiv.onclick = function (){
+            new_show.setAttribute("class", "bottomOut");
+            var bg_opcity = document.getElementById("bg_opcity").style.display = "none";
+            $("#xq_wrap").css("height","100%");
+            $("#xq_wrap").css("overflow","auto");
+
+            timer = setTimeout("card_In.setAttribute('class' ,'bottomIn')" , 1000);
+
+            timer = setTimeout(function(){
+                $("#new_show").css({
+                    "filter:alpha(opacity":"0",
+                    "-moz-opacity":"0",
+                    "-khtml-opacity":"0",
+                    "opacity":"0"
+                })
+
+            },1000)  
+        }
+
+        var xq_wrap = document.getElementById("xq_wrap");
+        xq_wrap.onscroll = function (){
+
+             $("#new_show").css({
+                "filter:alpha(opacity":"0",
+                "-moz-opacity":"0",
+                "-khtml-opacity":"0",
+                "opacity":"0"
+             })
+        }
+
+        card_In.onclick = function(){
+            card_In.setAttribute("class", "bottomOut");
+
+            timer = setTimeout("new_show.setAttribute('class' ,'bottomIn')" , 1000)
+            new_show.style.display="block";
+
+            var bg_opcity = document.getElementById("bg_opcity").style.display = "block";
+       
+            $("#xq_wrap").css("overflow","hidden");
+
+            $("#new_show").css({
+                "filter:alpha(opacity":"1",
+                "-moz-opacity":"1",
+                "-khtml-opacity":"1",
+                "opacity":"1"
+             })
+        }
+
+    </script>
+    <!-- 页面数据 -->
+
+    <script type="text/javascript" src="/static/js/request.js"></script>
+    <script type="text/javascript">
+        var ccid = request("ccid"); 
+        if (ccid.length > 10) {
+            ccid = ccid.substr(0, 19);
+        }
+        var session_id = request("session_id");
+        //是否已换卡
+        $(document).ready(function(){
+            $.post('/api/cardinfo/ischange?ccid='+ccid,{},function(data){
+                if(data == 'ok')
+                {
+                    $("#look_newcard").hide();
+                    //$("#know").show();
+                    $(".show_cont span").css("border-bottom" , "none");
+                    var new_show_height = $("#new_show").height();
+
+                    //alert(new_show_height);
+                    //$("#oDiv").css("bottom" , new_show_height -44  + "px");
+                    
+                    $("#text_2").html("亲爱的用户，您已购买过新套餐。<br />新卡邮寄需要一段时间，请您耐心等待~")
+                    $("#new_show").css({
+                        height:"245px",
+                        backgroundSize:"100% 202px"
+                    });
+                    
+                   /*$("#new_show p").css({
+                        marginTop:"20px"
+                    });*/
+                    $("#oDiv").css({
+                        bottom:"198px"
+                    })
+                    
+                    
+                }
+            });
+        });
+        
+        var lookurl = $("#look_newcard").attr("href");
+        var buyurl = lookurl+'?ccid='+ccid+'&session_id='+session_id;
+        $("#look_newcard").attr("href",buyurl);
+        $(function() {
+       //套餐详情
+        $.ajax({
+           url: "/api/cardinfo/getFlowInfo",
+           data: "ccid=" + ccid,
+           type: "GET",
+           dataType: "json",
+           success: function(re) {
+               if (re['data']['demo'] != undefined) {
+                   var demo = "<li>" + re['data']['demo'] + "</li>";
+                   demo = demo.replace('<br>','</li><li>');
+                   $("#info_list").html(demo);
+               }
+           }
+        });
+        //充值记录
+        $.ajax({
+            url: "/device/Getfloworderlist/index",
+            data: "ccid=" + ccid,
+            type: "GET",
+            dataType: "json",
+            success: function (re) {
+                var code = re['code'];
+                if (code == '200') {
+                    var data = re['data'];
+                    if (data.length == 0) {
+                        $("#pay_list").append("<div class=\"sh_hi\" style=\"border-bottom:none;\"><p class=\"sh_hi_p1\" style=\"color:#999;\">无充值记录</p></div>");
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        if (i == data.length - 1)
+                            $("#pay_list").append("<div class=\"sh_hi\" style=\"border-bottom:none;\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+                        else {
+                            $("#pay_list").append("<div class=\"sh_hi\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+                        }
+                    }
+                    //充值时间
+                    $(".sh_hi").append("<p class=\"sh_hi_p3\">充值时间：2014-11-1&nbsp&nbsp17:01:21</p>")
+
+                } else if (re['code'] == "500") {
+                    location.href = "/api/cardinfo/netbusy";
+                }
+            }
+        });
+    });
+    </script>
+    <script type="text/javascript" src="/static/js/getcardinfo_old.js"></script>
+</body>
+</html>

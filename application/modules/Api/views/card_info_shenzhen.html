@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content=""/>
+<meta name="apple-touch-fullscreen" content="YES" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="HandheldFriendly" content="true" />
+<meta http-equiv="x-rim-auto-match" content="none" />
+<meta name="format-detection" content="telephone=no" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<!-- This is to force IE into the latest version mode, overriding 'compatibility' mode which breaks everything. -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>卡详情</title>
+<style>
+    html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+    body {font-size: 1.4rem;/*1.4 × 10px = 14px */}
+    body{font: 13px/1.231 arial,helvetica,clean,sans-serif;}
+    *{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    ul li, ol li{
+        list-style: none;
+    }
+    html,body{
+        width: 100%;
+
+        background: #f0f0f6;
+    }
+    #wrap{
+        width: 100%;
+
+
+        overflow-x: hidden;
+        background: #f0f0f6;
+        position: relative;
+    }
+
+    .header{
+        background: #fff;
+        padding: 16px 0;
+        border-bottom: 1px solid #e5e5e5;
+
+    }
+    .header .card_num{
+        height: 30px;
+        width: 93%;
+        margin-left: 3%;
+        border-radius: 15px;
+        border: 1px solid #e9e6e6;
+        line-height: 30px;
+        text-align: center;
+        background: #eeeeee;
+        color: #333333;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .header .span1{
+        width: 100%;
+        text-align: center;
+        color: #2882e2;
+        font-size: 1.8rem;
+        display: block;
+        margin-top: 9px;
+    }
+
+    .header .hea_bot{
+        padding: 2% ;
+        width: 89%;
+        margin-left: 3%;
+        line-height: 22px;
+        background: #e1f0ff;
+        margin-top: 13px;
+        color: #2882e2;
+        border: 1px solid #74b3f5;
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+
+    .content{
+        width: 100%;
+        margin-top: 12px;
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
+        border-top: 1px solid #e5e5e5;
+        margin-bottom: 60px;
+    }
+
+    .content .tit{
+        height: 50px;
+        border-bottom: 1px solid #e5e5e5;
+        list-style: none;
+        overflow: hidden;
+    }
+
+    .content .tit li{
+        float: left;
+        width: 49%;
+        text-align: center;
+        list-style: none;
+        height: 50px;
+        line-height: 72px;
+        font-size: 1.4rem;
+        color: #999999;
+    }
+
+    .content .info{
+        width: 94%;
+        margin-left: 3%;
+        padding: 13px 0;
+
+    }
+
+    .content .pay{
+        width: 94%;
+        margin-left: 3%;
+        display: none;	
+    }
+
+    .content .info li{
+        color: #333;
+        font-size: 1.3rem;
+        line-height: 22px;
+    }
+
+    .footer{
+        margin-top: 25px;
+        height: 55px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-size: 100% 70px;
+        background: #ffffff;
+        border-top: 1px solid #e5e5e5;
+
+    }
+
+    .footer span{
+        line-height: 55px;
+        color: #ff4400;
+        font-size: 1.8rem;
+        margin-left: 3%;
+        width: 35%;
+        float: left;
+        font-weight: bold;
+
+    }
+
+    .footer a{
+        width: 34%;
+        height: 40px;
+        background: #ff4400;
+        display: block;
+        line-height: 39px;
+        text-align: center;
+        border-radius: 5px;
+        color: #ededf3;
+        font-size: 1.5rem;
+        margin-top: 10px;
+        text-decoration: none;
+        margin-left: 33%;
+    }
+
+    .sh_hi{
+        width: 96%;
+        margin-left: 2%;
+        padding: 10px 0;
+        border-bottom: 1px solid #e5e5e5;
+
+    }
+    .sh_hi_p1{
+        font-size: 1.5rem;
+        color: #555555;
+        margin-bottom: 5px;
+    }
+    .sh_hi_p1 span{
+        float: right;
+        color: #ff4400;
+        font-size: 1.5rem;
+
+    }
+    .sh_hi_p2{
+
+        font-size: 1.3rem;
+        color: #999999;
+    }
+
+    .doc {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: url(/static/images/pic1.png) no-repeat center;
+        background-size: 100% 100%;
+        left: 50%;
+        margin-left: -75px;
+        top:85px;
+    }
+
+    #percentText{ 
+        position:absolute;
+        z-index:1; 
+        border-radius:75px; 
+        height:130px; 
+        line-height:130px; 
+        font-size:3.5rem; 
+        text-align:center; 
+        color:#000; 
+        width: 150px;
+        opacity: 0.6;
+    }
+
+    #over{
+        position:absolute;
+        top:25px;
+        z-index:1; 
+        border-radius:75px; 
+        height:130px; 
+        line-height:130px; 
+        font-size:1.2rem; 
+        text-align:center; 
+        color:#000; 
+        width: 150px;
+    }
+
+    #canvas{
+        overflow: hidden;
+        display: block;
+    }
+    .hea_div3 {
+        height: auto;
+        margin-left: 3%;
+        width: 94%;
+    }
+    .container {
+        font: 12px "微软雅黑","Lucida Grande",Tahoma,Verdana,sans-serif;
+        margin: 20px auto 20px 2%;
+        width: 96%;
+    }
+    .container p {
+        color: #2882e2;
+        font-size: 17px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .progress {
+        background: none repeat scroll 0 0 #fff;
+        border: 1px solid #e5e5e5;
+        height: 15px;
+        padding: 5px;
+    }
+    .progress > span:before {
+        bottom: 0;
+        content: "";
+        height: 15px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+    }
+    .progress > span {
+        background: none repeat scroll 0 0 #56cc32;
+        float: left;
+        height: 15px;
+        line-height: 16px;
+        min-width: 30px;
+        position: relative;
+        text-align: right;
+    }
+    .progress > span > span {
+        color: rgba(0, 0, 0, 0.7);
+        font-size: 11px;
+        font-weight: bold;
+        padding: 0 8px;
+        text-shadow: 0 1px rgba(255, 255, 255, 0.4);
+    }
+
+</style>
+</head>
+<body>
+<div id="wrap">
+    <div class="header">
+        <p class="card_num"><!--12345678912345678912*--></p>
+        <span class="span1"><!--3.5G全国流量卡--></span>        
+        <div class="hea_div3"><section class="container"><p>全国套餐余量<span id="left1">*MB</span> 全国套餐总量<span id="total1">2048MB</span></p><div class="progress"><span style="width: 0%;" class="red" id="punlim"></span></div></section></div>
+        <div class="hea_div3"><section class="container"><p>本地套餐余量<span id="left2">*MB</span> 本地套餐总量<span id="total2">8192MB</span></p><div class="progress"><span style="width: 0%;" class="red" id="plocal"></span></div></section></div>
+        <p class="hea_bot"><!--本卡内含3.5GB全国流量，1GB=1024MB，跨月不清零，有效期自激活开始计算180天，免漫游费。激活方式为首次使用该卡联网即激活。--></p>
+    </div>
+
+    <div class="content">
+        <ul class="tit">
+            <li style="background:url(/static/images/pic3.png) no-repeat center 6px;;background-size:19px 19px; border-right: 1px solid #e5e5e5; color:#2882e2" id="info_mes" onclick="tab(this.id)">套餐详情</li>
+            <li style="background:url(/static/images/pic4.png) no-repeat center 6px;background-size:19px 19px;" id="pay" onclick="tab(this.id)">充值记录</li>
+        </ul>
+
+        <div style="clear:both"></div>
+
+        <ul class="info" id="info_list">
+            <!--<li>1、全国均可使用，免漫游费（暂不支持港澳台）</li>
+                <li>2、用户首次使用该卡联网即激活，有效期自激活当日起算连续180天，如流量用完，则有效期提前结束</li>
+                <li>3、有效期结束后，未用完的流量同时作废，不能再使用</li>-->
+        </ul>
+
+        <div class="pay" id="pay_list">
+            <!--<div class="sh_hi">
+                <p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+                <p class="sh_hi_p2">2014.11到2015.01每月1G</p>
+            </div>
+
+            <div class="sh_hi" style="border-bottom:none">
+                <p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+                <p -->
+        </div>
+    </div>
+    <div class="footer">
+        <!--<span>￥139.00</span>-->
+        <a href="javascript:location.href='/Api/pay/index?ccid='+ccid+'&session_id='+session_id">充值</a>
+    </div>
+</div>
+<script type="text/javascript">
+    //TAB切换
+    function tab(obj) {
+        var info_mes = document.getElementById("info_mes");
+        var pay = document.getElementById("pay");
+        var info_list = document.getElementById("info_list");
+        var pay_list = document.getElementById("pay_list");
+
+
+        if (obj == "info_mes") {
+
+            info_list.style.display = "block";
+            pay_list.style.display = "none";
+
+            info_mes.style.background = "url(/static/images/pic3.png) no-repeat center 6px";
+            pay.style.background = "url(/static/images/pic4.png) no-repeat center 6px";
+            javascript:void(0)
+            info_mes.style.color = "#2882e2";
+            pay.style.color = "#999999";
+
+            info_mes.style.backgroundSize = "19px 19px";
+            pay.style.backgroundSize = "19px 19px";
+        } else if (obj == "pay") {
+
+            info_list.style.display = "none";
+            pay_list.style.display = "block";
+
+            info_mes.style.background = "url(/static/images/pic2.png) no-repeat center 6px";
+            pay.style.background = "url(/static/images/pic01.png) no-repeat center 6px";
+
+            info_mes.style.color = "#999999";
+            pay.style.color = "#2882e2";
+
+
+            info_mes.style.backgroundSize = "19px 19px";
+            pay.style.backgroundSize = "19px 19px";
+        }
+    }
+</script>
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/static/js/request.js"></script>
+<script type="text/javascript">
+    var ccid = request("ccid");
+    if (ccid.length > 10) {
+        ccid = ccid.substr(0, 19);
+    }
+    var session_id = request("session_id");
+    //获取用户流量订单
+    $.ajax({
+        url: "/device/Getfloworderlist/index",
+        data: "ccid=" + ccid,
+        type: "GET",
+        dataType: "json",
+        success: function(re) {
+            var code = re['code'];
+            if (code == "200") {
+                var data = re['data'];
+                if (data.length == 0) {
+                    $(".pay").append("<div class=\"sh_hi\" style=\"border-bottom:none;\"><p class=\"sh_hi_p1\" style=\"color:#999;\">无充值记录</p></div>");
+                }
+                for (var i = 0; i < data.length; i++) {
+
+                    if (i == data.length - 1)
+                        $(".pay").append("<div class=\"sh_hi\" style=\"border-bottom:none\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+                    else {
+                        $(".pay").append("<div class=\"sh_hi\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+                    }
+                }
+            }
+
+        }
+    });
+    $(function() {
+        //获取当前用户最近的套餐详情
+        $.ajax({
+            url: "/api/cardinfo/getFlowInfo",
+            data: "ccid=" + ccid,
+            type: "GET",
+            dataType: "json",
+            success: function(re) {
+                if (re['data']['demo'] != undefined) {
+                    var demo = "<li>" + re['data']['demo'] + "</li>";
+                    demo = demo.replace('<br>', '</li><li>');
+                    $(".info").html(demo);
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript" src="/static/js/getcardinfo_shenzhen.js"></script>
+</body>
+</html>

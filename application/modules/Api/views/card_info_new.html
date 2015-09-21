@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title" content=""/>
+	<meta name="apple-touch-fullscreen" content="YES" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta http-equiv="x-rim-auto-match" content="none" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<!-- This is to force IE into the latest version mode, overriding 'compatibility' mode which breaks everything. -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>卡详情</title>
+    <style>
+
+    	html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+		body {font-size: 1.4rem;/*1.4 × 10px = 14px */}
+		body{font: 13px/1.231 arial,helvetica,clean,sans-serif;}
+		*{
+		    margin: 0;
+		    padding: 0;
+		    text-decoration: none;
+		}
+		ul li, ol li{
+		    list-style: none;
+		}
+		html,body{
+		    width: 100%;
+		    
+		    background: #f0f0f6;
+		}
+		#wrap{
+			width: 100%;
+			
+			
+			overflow-x: hidden;
+			background: #f0f0f6;
+			position: relative;
+		}
+		
+		.header{
+			background: #fff;
+			padding: 16px 0;
+			border-bottom: 1px solid #e5e5e5;
+
+		}
+		.header .card_num{
+			height: 30px;
+			width: 93%;
+			margin-left: 3%;
+			border-radius: 15px;
+			border: 1px solid #e9e6e6;
+			line-height: 30px;
+			text-align: center;
+			background: #eeeeee;
+			color: #333333;
+			font-size: 2rem;
+			font-weight: bold;
+		}
+
+		.header .span1{
+			width: 100%;
+			text-align: center;
+			color: #2882e2;
+			font-size: 1.8rem;
+			display: block;
+			margin-top: 9px;
+		}
+
+		.header .hea_bot{
+			padding: 2% ;
+			width: 89%;
+			margin-left: 3%;
+			line-height: 22px;
+			background: #e1f0ff;
+			margin-top: 13px;
+			color: #2882e2;
+			border: 1px solid #74b3f5;
+			font-size: 1.5rem;
+			margin-top: 180px;
+		}
+
+		.content{
+			width: 100%;
+			margin-top: 12px;
+			background: #fff;
+			border-bottom: 1px solid #e5e5e5;
+			border-top: 1px solid #e5e5e5;
+			margin-bottom: 60px;
+		}
+
+		.content .tit{
+			height: 50px;
+			border-bottom: 1px solid #e5e5e5;
+			list-style: none;
+			overflow: hidden;
+		}
+
+		.content .tit li{
+			float: left;
+			width: 49%;
+			text-align: center;
+			list-style: none;
+                        height: 50px;
+                        line-height: 72px;
+			font-size: 1.4rem;
+			color: #999999;
+		}
+
+		.content .info{
+			width: 94%;
+			margin-left: 3%;
+			padding: 13px 0;
+			
+		}
+
+		.content .pay{
+			width: 94%;
+			margin-left: 3%;
+			display: none;	
+		}
+
+		.content .info li{
+			color: #333;
+			font-size: 1.3rem;
+			line-height: 22px;
+		}
+
+		.footer{
+			margin-top: 25px;
+			height: 55px;
+			width: 100%;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			background-size: 100% 70px;
+			background: #ffffff;
+			border-top: 1px solid #e5e5e5;
+
+		}
+
+		.footer span{
+			line-height: 55px;
+			color: #ff4400;
+			font-size: 1.8rem;
+			margin-left: 3%;
+			width: 35%;
+			float: left;
+			font-weight: bold;
+
+		}
+
+		.footer a{
+			width: 34%;
+			height: 40px;
+			background: #ff4400;
+			display: block;
+			line-height: 39px;
+			text-align: center;
+			border-radius: 5px;
+			color: #ededf3;
+			font-size: 1.5rem;
+			margin-top: 10px;
+			text-decoration: none;
+			margin-left: 33%;
+		}
+
+		.sh_hi{
+			width: 96%;
+			margin-left: 2%;
+			padding: 10px 0;
+			border-bottom: 1px solid #e5e5e5;
+	
+		}
+		.sh_hi_p1{
+			font-size: 1.5rem;
+			color: #555555;
+			margin-bottom: 5px;
+		}
+		.sh_hi_p1 span{
+			float: right;
+			color: #ff4400;
+			font-size: 1.5rem;
+
+		}
+		.sh_hi_p2{
+
+			font-size: 1.3rem;
+			color: #999999;
+		}
+
+		.doc {
+			position: absolute;
+		 	width: 150px;
+		 	height: 150px;
+			background: url(/static/images/pic1.png) no-repeat center;
+			background-size: 100% 100%;
+			left: 50%;
+			margin-left: -75px;
+			top:85px;
+		}
+
+		#percentText{ 
+			position:absolute;
+			z-index:1; 
+			border-radius:75px; 
+			height:130px; 
+			line-height:130px; 
+			font-size:3.5rem; 
+			text-align:center; 
+			color:#000; 
+			width: 150px;
+			opacity: 0.6;
+		}
+
+		#over{
+			position:absolute;
+			top:25px;
+			z-index:1; 
+			border-radius:75px; 
+			height:130px; 
+			line-height:130px; 
+			font-size:1.2rem; 
+			text-align:center; 
+			color:#000; 
+			width: 150px;
+		}
+
+		#canvas{
+			overflow: hidden;
+			display: block;
+		}
+
+    </style>
+</head>
+<body>
+	<div id="wrap">
+		<div class="header">
+			<p class="card_num"><!--12345678912345678912*--></p>
+			<span class="span1"><!--3.5G全国流量卡--></span>
+
+			<section class="doc">
+			    <canvas id="canvas" style="position:absolute;top:15px;left:15px;z-index:1;" width="120" height="120"></canvas>
+			    <div id="percentText"></div>
+			    <p id="over">剩余流量</p>
+			</section>
+
+			<p class="hea_bot"><!--本卡内含3.5GB全国流量，1GB=1024MB，跨月不清零，有效期自激活开始计算180天，免漫游费。激活方式为首次使用该卡联网即激活。--></p>
+		</div>
+
+
+		<div class="content">
+			<ul class="tit">
+				<li style="background:url(/static/images/pic3.png) no-repeat center 6px;;background-size:19px 19px; border-right: 1px solid #e5e5e5; color:#2882e2" id="info_mes" onclick="tab(this.id)">套餐详情</li>
+				<li style="background:url(/static/images/pic4.png) no-repeat center 6px;background-size:19px 19px;" id="pay" onclick="tab(this.id)">充值记录</li>
+			</ul>
+
+			<div style="clear:both"></div>
+			 
+			<ul class="info" id="info_list">
+<!--				<li>1、全国均可使用，免漫游费（暂不支持港澳台）</li>
+				<li>2、用户首次使用该卡联网即激活，有效期自激活当日起算连续180天，如流量用完，则有效期提前结束</li>
+				<li>3、有效期结束后，未用完的流量同时作废，不能再使用</li>-->
+			</ul>
+
+			<div class="pay" id="pay_list">
+				<!--<div class="sh_hi">
+					<p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+					<p class="sh_hi_p2">2014.11到2015.01每月1G</p>
+				</div>
+
+				<div class="sh_hi" style="border-bottom:none">
+					<p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+					<p -->
+			</div>
+		</div>
+		
+
+		<div class="footer">
+			<!--<span>￥139.00</span>-->
+			<a href="javascript:location.href='/Api/pay/index?ccid='+ccid+'&session_id='+session_id">充值</a>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+        
+		//TAB切换
+        function tab(obj) {
+            var info_mes = document.getElementById("info_mes");
+            var pay = document.getElementById("pay");
+            var info_list = document.getElementById("info_list");
+            var pay_list = document.getElementById("pay_list");
+
+
+            if (obj == "info_mes") {
+
+                info_list.style.display = "block";
+                pay_list.style.display = "none";
+
+                info_mes.style.background = "url(/static/images/pic3.png) no-repeat center 6px";
+                pay.style.background = "url(/static/images/pic4.png) no-repeat center 6px";
+                javascript:void(0)
+                info_mes.style.color = "#2882e2";
+                pay.style.color = "#999999";
+
+                info_mes.style.backgroundSize = "19px 19px";
+                pay.style.backgroundSize = "19px 19px";
+            } else if (obj == "pay") {
+
+                info_list.style.display = "none";
+                pay_list.style.display = "block";
+
+                info_mes.style.background = "url(/static/images/pic2.png) no-repeat center 6px";
+                pay.style.background = "url(/static/images/pic01.png) no-repeat center 6px";
+
+                info_mes.style.color = "#999999";
+                pay.style.color = "#2882e2";
+
+
+                info_mes.style.backgroundSize = "19px 19px";
+                pay.style.backgroundSize = "19px 19px";
+            }
+        }
+        //drawingSphere(3500,0); //进入页面默认显示正在查询流量
+		//剩余流量显示
+		function drawingSphere(num, proportion,type) {
+			var canvas = document.getElementById('canvas');
+			var percentText = document.getElementById('percentText');
+			var ctx = canvas.getContext('2d');
+			var step = 0;
+			var _proportion = proportion+0.00001;
+			var proportion = 120*proportion;
+			
+			/*proportion = proportion<=1 ? proportion : 1;
+			proportion = 90*(1-proportion);
+			
+			var toPercent = proportion.toFixed(2) + '%';*/
+                        if(typeof(type) == "undefined"){
+                          
+                            percentText.innerHTML = "<span style='font-size:2.5rem'>正在获取</span>";
+                        }else if(type == "1"){
+                            percentText.innerHTML = num+'<b style="font-size: 1.2rem;">M</b>';
+                        }else if(type == "2"){
+                            percentText.innerHTML = "<span style='font-size:2.5rem'>获取失败</span>";
+                        }
+			window.requestAnimFrame = (function() {
+				return window.requestAnimationFrame ||
+					window.webkitRequestAnimationFrame ||
+					window.mozRequestAnimationFrame ||
+					function(callback) {
+						window.setTimeout(callback, 1000 / 60);
+					};
+			})();
+
+
+			//定义波浪的颜色  
+			var lines = ["rgba(68,214,17, 1)"];
+
+			function loop() {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					step++;
+
+
+					ctx.fillStyle = lines[0];
+					//每个矩形的角度都不同，每个之间相差30度  
+					var angle = (step) * Math.PI / 35;
+
+					var _H = Math.sin(angle) * 4;
+					var _hr = Math.cos(angle) * 4;
+
+					var y = parseInt(120-proportion);
+					var sAngle = 0.5-_proportion;
+					var eAngle = 1-sAngle;
+
+					var m1 = sAngle+Math.PI;
+					var m2 = eAngle+Math.PI;
+
+					var startX = parseInt(60*Math.cos((sAngle+1)*Math.PI))+60;
+					var startY = Math.abs(parseInt(60*Math.sin((sAngle+1)*Math.PI))-60);
+					var endX = parseInt(60*Math.cos((eAngle+1)*Math.PI))+60;
+					var endY = Math.abs(parseInt(60*Math.sin((eAngle+1)*Math.PI))-60);
+
+				//	console.log((sAngle*180+180)+','+(eAngle*180+180)+'    ['+startX+','+startY+']['+endX+','+endY+']  '+y);
+					ctx.beginPath();
+					
+					ctx.moveTo(startX, startY);
+
+					ctx.bezierCurveTo(
+						startX, 
+						endY + _H - 5, 
+						endX, 
+						endY + _hr - 5, 
+						endX, 
+						endY
+					);
+
+					ctx.arc(
+						60,
+						60,
+						60,
+						sAngle*Math.PI, 
+    					eAngle*Math.PI,
+						false//counterclockwise
+					);
+
+					//ctx.lineTo(canvas.width, canvas.height);
+					//ctx.lineTo(0, canvas.height);
+					//ctx.lineTo(0, proportion);
+
+
+					ctx.closePath();
+					ctx.fill();
+
+					requestAnimFrame(loop);
+				}
+
+			loop();
+
+		}
+
+		/*
+			函数名： drawingSphere(num, proportion)
+			参数：	
+				num : 当前用户的流量
+				proportion ： 当前流量与总流量的比例
+		*/
+
+		drawingSphere("",0); 
+	</script>
+
+	<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+ 	 <script type="text/javascript" src="/static/js/request.js"></script>
+
+	<script type="text/javascript">
+		var ccid=request("ccid");  //alert(ccid);
+		if(ccid.length > 10){
+			ccid=ccid.substr(0,19);
+		}
+
+		var session_id=request("session_id");  //alert(session_id);
+
+		$.ajax({
+			url: "/device/Getfloworderlist/index",
+			data: "ccid=" + ccid,
+			type: "GET",
+			dataType: "json",
+			success: function(re){
+				var code = re['code'];
+				//alert(code);
+				if(code == "200"){
+
+					var data = re['data'];
+
+					if(data.length == 0){
+						$(".pay").append("<div class=\"sh_hi\" style=\"border-bottom:none;\"><p class=\"sh_hi_p1\" style=\"color:#999;\">无充值记录</p></div>");
+					}
+					
+					for (var i = 0; i < data.length; i++) {
+
+	                    if (i == data.length - 1)
+	                        $(".pay").append("<div class=\"sh_hi\" style=\"border-bottom:none\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+	                    else {
+	                        $(".pay").append("<div class=\"sh_hi\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p><p class=\"sh_hi_p2\">" + data[i]['description'] + "</p></div>");
+	                    }
+
+                	}
+				}
+
+			}
+
+		})
+                $(function() {
+                //套餐详情
+                $.ajax({
+                    url: "/api/cardinfo/getFlowInfo",
+                    data: "ccid=" + ccid,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(re) {
+                        if (re['data']['demo'] != undefined) {
+                            var demo = "<li>" + re['data']['demo'] + "</li>";
+                            demo = demo.replace('<br>', '</li><li>');
+                            $(".info").html(demo);
+                          
+
+                        }
+                    }
+                })
+
+
+            })
+		
+	</script>
+        <script type="text/javascript" src="/static/js/getcardinfo_new.js"></script>
+</body>
+</html>

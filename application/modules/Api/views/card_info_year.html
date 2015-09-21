@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no" name="format-detection">
+        <meta name="viewport" content="width=device-width,initial-scale=1" /> 
+        <meta name="format-detection" content="telephone=no" />
+        <title>卡详情</title>
+        <link rel="stylesheet" type="text/css"  href="/static/css/reset.css" />
+        <link rel="stylesheet" type="text/css"  href="/static/css/card_info.css" />
+    </head>
+    <body>
+        <div id="xq_wrap">
+            <div class="header">
+                <div id="content"> <img src="/static/images/loading.gif" style="width:10%;margin-top:20px;margin-bottom:20px;margin-left:45%;"></div>
+                <!--                <div class="hea_div1">
+                                    <p class="hea_div1_p1">12345678912345678912*</p>
+                                    <p class="hea_div1_p2">3GB全国流量卡</p>
+                                </div>
+                
+                                <div  class="hea_div2">
+                                    本卡内含3GB流量，1GB=1024MB，有效期3个月，每个自然月可使用1GB流量，当月未使用流量不计入次月。全国流量，跨省免收漫游费。
+                                </div>-->
+
+                <div class="hea_div3">
+                    <div> <img src="/static/images/loading.gif" style="width:10%;margin-top:20px;margin-bottom:20px;margin-left:45%;"></div>
+                    <!--                    <section class="container">
+                                            <p>套餐余量<span id="left"></span>   套餐总量<span id="total"></span></p>
+                                            <div class="progress">
+                                                <span class="red" style="width:0%;"><span></span></span>
+                                            </div>
+                                        </section>-->
+                </div>
+
+                <div class="hea_div4">
+                    <p>此卡尚未激活，激活后方可上网使用<br />申请激活后约2个工作日内完成激活<br />此最迟激活时间为：2014.10.31 <br />逾期系统将自动为您激活</p>
+                    <a href="javascript:void(0)">发送激活申请</a>
+                </div>
+
+                <div class="hea_div5">
+                    <p>此卡尚未激活，激活后方可上网使用<br />申请激活后约2个工作日内完成激活<br />此最迟激活时间为：2014.10.31<br />逾期系统将自动为您激活</p>
+                    <a href="javascript:void(0)">正在等待申请</a>
+                </div>
+
+                <div class="hea_div6">
+                    <p>您的卡在有效期到期后的3个月内未充值，已作废，建议您去商城选购我们新的流量套餐，我们会免费为您邮寄新卡。</p>
+                    <a href="javascript:void(0)">去流量商城</a>
+                </div>
+            </div>
+
+
+            <div class="center">
+                <div class="lilu">
+                    <p class="tit">充值记录</p>
+                    <!--
+                    <div class="sh_hi">
+                            <p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+                            <p class="sh_hi_p2">2014.11到2015.01每月1G</p>
+                    </div>
+
+                    <div class="sh_hi" style="border-bottom:none">
+                            <p class="sh_hi_p1"><span>支付成功</span>3GB全国流量包</p>
+                            <p class="sh_hi_p2">2014.11到2015.01每月1G</p>
+                    </div>
+                    -->
+                </div>
+                <div style="background:#f0f0f6; height:12px;"></div>
+                <div class="taocana" style="display: none;">
+                    <p class="tit1" style="border-bottom: 1px solid #e5e5e5">套餐详情</p>
+
+                    <div class="sh_hi_tancan" style="display:block;">
+                        <ul>
+
+                            <li>1. 全国均可使用，免漫游费（暂不支持港澳台），跨月流量不清零</li>
+                            <li>2. 首次使用该卡联网即激活，套餐有效期自激活当天开始计算，连续180天</li>
+                            <li>3. 流量提前用完，套餐有效期提前结束</li>
+                            <li>4. 套餐有效期结束后，3个月内未续费，则该卡作废</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer">
+                <a href="javascript:location.href='/Api/pay/index?ccid='+ccid+'&session_id='+session_id">充值</a>
+            </div>
+        </div>
+
+        <div id="no_info">
+            <img src="images/xq_pic3.png" />
+
+            <p>
+                未查询到相关信息<br />请确认是否是747流量卡
+            </p>
+        </div>
+
+        <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/static/js/request.js"></script>
+        <script type="text/javascript">
+
+            var ccid = request("ccid"); //alert(ccid);
+            if (ccid.length > 10) {
+                ccid = ccid.substr(0, 19);
+            }
+            var session_id = request("session_id");//alert(session_id);
+
+            $.ajax({
+                url: "/device/Getfloworderlist/index",
+                data: "ccid=" + ccid,
+                type: "GET",
+                dataType: "json",
+                success: function(re) {
+                    var code = re['code'];
+                    if (code == '200') {
+                        //alert(re['data'].ccid);
+
+                        var data = re['data'];
+                        if (data.length == 0) {
+                            $(".lilu").append("<div class=\"sh_hi\" style=\"border-bottom:none;\"><p class=\"sh_hi_p1\" style=\"color:#999;\">无充值记录</p></div>");
+
+                        }
+                        for (var i = 0; i < data.length; i++) {
+
+                            if (i == data.length - 1)
+                                $(".lilu").append("<div class=\"sh_hi\" style=\"border-bottom:none\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p>" + data[i]['description'] + "</div>");
+                            else {
+                                $(".lilu").append("<div class=\"sh_hi\"><p class=\"sh_hi_p1\"><span>" + data[i]['status'] + "</span>" + data[i]['title'] + "</p>" + data[i]['description'] + "</div>");
+                            }
+
+                        }
+
+                    }else if(re['code'] == "500"){
+                       
+                        location.href="/api/cardinfo/netbusy";
+                    }
+                    $(this).css({
+                        "border-bottom": "1px solid #e5e5e5",
+                        "background": "url(/static/images/xq_pic2.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+                }
+            })
+            $(".tit").on("click", function() {
+                if ($(".sh_hi").css("display") == "block") {
+                    $(".sh_hi").hide();
+
+                    $(this).css({
+                        "border-bottom": "none",
+                        "background": "url(/static/images/xq_pic1.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+                } else {
+                    $(this).css({
+                        "border-bottom": "1px solid #e5e5e5",
+                        "background": "url(/static/images/xq_pic2.png) 98% 50%  no-repeat",
+                        "background-size": "18px 10px"
+                    })
+                    $(".sh_hi").show();
+
+                }
+
+
+//                if ($(".sh_hi_tancan").css("display") == "block") {
+//                    $(".sh_hi_tancan").hide();
+//                    $(".tit1").css("background", "url(/static/images/xq_pic1.png) no-repeat 98% center");
+//                    $(".tit1").css("background-size", "18px 10px");
+//                }
+
+
+            })
+
+            $(".tit1").on("click", function() {
+//                if ($(".sh_hi").css("display") == "block") {
+//                    $(".sh_hi").hide();
+//                    $(".tit").css("background", "url(/static/images/xq_pic1.png) no-repeat 98% center");
+//                    $(".tit").css("background-size", "18px 10px");
+//                }
+                if ($(".sh_hi_tancan").css("display") == "block") {
+                    $(".sh_hi_tancan").hide();
+                    $(this).css({
+                        "border-bottom": "none",
+                        "background": "url(/static/images/xq_pic1.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+                } else {
+                    $(".sh_hi_tancan").show();
+                    $(this).css({
+                        "border-bottom": "1px solid #e5e5e5",
+                        "background": "url(/static/images/xq_pic2.png) no-repeat 98% center",
+                        "background-size": "18px 10px"
+                    })
+
+                }
+
+
+            })
+
+
+            /*进度条*/
+
+            function loading(percent) {
+                $('.progress span').animate({width: percent}, 2000, function() {
+                    /*$(this).children().html(percent);
+                     if(percent=='100%'){
+                     $(this).children().html('加载完成,正在转向首页...&nbsp;&nbsp;&nbsp;&nbsp;');
+                     setTimeout(function(){
+                     $('.container').fadeOut();
+                     location.href="http://sc.admin5.com/";
+                     },1000);
+                     }*/
+                })
+            }
+            $(function() {
+                //套餐详情
+                $.ajax({
+                    url: "/api/cardinfo/getFlowInfo",
+                    data: "ccid=" + ccid,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(re) {
+                        if (re['data']['demo'] != undefined) {
+                            var demo = "<li>" + re['data']['demo'] + "</li>";
+                            demo = demo.replace('<br>', '</li><li>');
+                            $(".taocana ul").html(demo);
+                            $(".taocana").show();
+
+                        }
+                    }
+                })
+
+
+            })
+        </script>
+
+
+        <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <!--<script type="text/javascript">loading('5%');</script>-->
+        <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+        <!--<script type="text/javascript">loading('20%');</script>-->
+        <script type="text/javascript" src="/static/js/CFInstall.min.js"></script>
+        <!--<script type="text/javascript">loading('40%');</script>-->
+        <script type="text/javascript" src="/static/js/ext-core.js"></script>
+        <!--<script type="text/javascript">loading('70%');</script>-->
+        <script type="text/javascript" src="/static/js/mootools-yui-compressed.js"></script>
+        <!--<script type="text/javascript">loading('100%');</script>-->
+        <script type="text/javascript" src="/static/js/dojo.xd.js"></script>
+        <script type="text/javascript" src="/static/js/getcardinfo_year.js"></script>
+        <div style="text-align:center;clear:both">
+        </div>
+
+    </body>
+</html>

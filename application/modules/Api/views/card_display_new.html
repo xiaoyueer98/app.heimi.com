@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="viewport" content="width=device-width,initial-scale=1" /> 
+    <meta name="format-detection" content="telephone=no" />
+    <title>卡详情</title>
+    <link rel="stylesheet" type="text/css"  href="/static/css/reset.css" />
+    <link rel="stylesheet" type="text/css"  href="/static/css/look_new.css" />
+</head>
+<body>
+    <div id="xq_wrap">
+        <div class="header">
+            <p class="card_num">3.5G全国流量卡</p>
+            <span class="span1">自激活当日起180天有效</span>
+            <div  class="hea_div2">
+                此卡内含3.5GB流量（1GB=1024MB），跨月流量不清零；首次使用该卡联网即激活。
+            </div>  
+        </div>
+
+        <div class="look_cont">
+            <p>套餐详情</p>
+            <ul>
+                <li>1. 此包内含3.5GB流量（1GB=1024MB），跨月流量不清零；</li>
+                <li>2. 全国均可使用，免漫游费（暂不支持港澳台）；</li>
+                <li>3. 在当前套餐有效期结束后，24小时内充值生效；</li>
+                <li>4. 充值生效后，套餐有效期重新计算，连续180天。</li>
+            </ul>
+        </div>
+        <div class="footer">
+            <p><b>￥119.00</b>原价:￥159.00&nbsp&nbsp换购优惠:40.00</p>
+            <a id="buy_newcard" href="#" class="czbtn" style="color: #ffffff">购买</a>
+        </div>
+    </div>
+
+    <div id="lodd">
+            <img src="/static/images/loading.gif">        
+    </div>
+
+    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/request.js"></script>
+    <script type="text/javascript">
+        var ccid = request("ccid"); 
+        if (ccid.length > 10) {
+            ccid = ccid.substr(0, 19);
+        }
+        var session_id = request("session_id");
+        var buyurl = '/api/payinfo/index?ccid='+ccid+'&session_id='+session_id;
+        $("#buy_newcard").attr("href",buyurl);
+
+        window.onload = function () {
+            $("#lodd").hide();
+        }
+    </script>
+</body>
+</html>

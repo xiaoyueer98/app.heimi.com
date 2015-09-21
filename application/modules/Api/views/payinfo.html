@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection"> 
+    <meta name="format-detection" content="telephone=no" />
+    <title>换卡</title>
+    <link rel="stylesheet" type="text/css"  href="/static/css/reset.css" />
+    <link rel="stylesheet" type="text/css"  href="/static/css/change_card.css" />
+	<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/static/js/request.js"></script>
+	<script type="text/javascript" src="/static/js/payon.js"></script>
+
+</head>
+<body>
+	<div id-"par_wrap">
+		<div class="header" >
+			<?php if (!empty($userAddress)){ ?>
+			<div class="have_add">
+				<p  onclick="window.location='/api/payinfo/upaddress?ccid=<?php echo $ccid;?>&session_id=<?php echo $sid;?>'">
+				<?php echo $userAddress['name'].'&nbsp;&nbsp;'.$userAddress['receive_tel'].'<span>'.$userAddress['province'].$userAddress['city'].$userAddress['area'].$userAddress['detail'].'</span>'; ?>
+				</p>	
+			</div>
+			<?php }else{?>
+			<p class="no_add" onclick="window.location='/api/payinfo/addaddress?ccid=<?php echo $ccid;?>&session_id=<?php echo $sid;?>'">请填写收货地址</p>
+			<?php }?>
+		</div>
+		<input type="hidden" name='addressname' id='addressname' value="<?php echo $userAddress['name']?>">
+		<div class="cont">
+			<p class="p1">3.5G全国流量卡<span>自激活当日起180天有效</span></p>
+			<p class="p2">此卡内含3.5GB流量（1GB=1024MB），跨月流量不清零；首次使用该卡联网即激活。</p>
+		</div>
+
+		<div class="obj_rmb">
+			<p><span>￥159.00</span>套餐总额</p>
+			<p><span>- ￥40.00</span>首次换卡优惠</p>
+			<p class="last">实付款：<b>￥119.00</b></p>
+		</div>
+
+		<div class="footer">
+	    	<a href="javascript:newchongzhi()" style="color: #ffffff">支付宝支付</a>
+	    </div>
+		<div id="lodd">
+	            <img src="/static/images/loading.gif" />        
+	    </div>
+    </div>
+
+    <script type="text/javascript">
+    	window.onload = function () {
+            $("#lodd").hide();
+        }
+    </script>
+	</body>
+</html>
